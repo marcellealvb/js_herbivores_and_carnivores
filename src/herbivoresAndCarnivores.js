@@ -10,10 +10,6 @@ class Animal {
     Animal.alive.push(this);
 
   }
-
-  static updateAlivelist() {
-    Animal.alive = Animal.alive.filter(animal => animal.health > 0);
-  }
 }
 
 class Herbivore extends Animal {
@@ -43,7 +39,9 @@ class Carnivore extends Animal {
     }
 
     target.health -= 50;
-    Animal.updateAlivelist();
+    if (target.alive <= 0) {
+      Animal.alive = Animal.alive.filter(animal => animal !== target);
+    }
   }
 }
 
